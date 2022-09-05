@@ -19,7 +19,6 @@ export const useFetchData = (url, page) => {
         const response = await fetch(`${url}?${queryParam}`);
         if (response.ok && !cancel) {
           const newData = await response.json();
-          console.log(newData);
           setData((x) => Array.isArray(newData) && [...x, ...newData]);
         }
       } catch (error) {

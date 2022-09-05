@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import styles from "../../Admin/components/RecipeForm.module.scss";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../context/AuthContext";
+import { UserContext } from "../../../context/UserContext";
 
 const AuthForm = () => {
+  const [auth, setAuth] = useContext(AuthContext);
+  const [currentUser, setCurrentUser] = useContext(UserContext);
+
+  let navigate = useNavigate();
   let defaultValues = {
     email: "",
     password: "",
@@ -31,7 +39,18 @@ const AuthForm = () => {
 
       if (response.ok) {
         const user = await response.json();
-        console.log(user);
+        Cookies.set("jwt", user.token);
+        setAuth(() => {
+          const savedCookie = Cookies.get("jwt");
+          return savedCookie || "";
+        });
+        localStorage.setItem("currentUser", JSON.stringify(user));
+        setCurrentUser(() => {
+          const saved = localStorage.getItem("currentUser");
+          const initalValue = JSON.parse(saved);
+          return initalValue || "";
+        });
+        navigate("/");
       }
     } catch (error) {
       console.log(error);
@@ -56,7 +75,7 @@ const AuthForm = () => {
         <label>Mot de passe</label>
         <input
           {...register("password")}
-          type="text"
+          type="password"
           placeholder="Mot de passe"
         ></input>
         <p>Error</p>

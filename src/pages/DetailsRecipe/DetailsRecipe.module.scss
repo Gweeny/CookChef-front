@@ -1,0 +1,50 @@
+.imageContainer {
+  height: 300px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  overflow: hidden;
+  img {
+    width: 100%;
+    transition: 1s transform;
+  }
+}
+
+.recette {
+  width: 822px;
+  height: 393px;
+  margin-bottom: 326px;
+  margin-left: 400px;
+  margin-top: 74px;
+}
+
+.inside {
+  background-color: var(--gray-1);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border-radius: 20px;
+  margin-top: 19px;
+  width: 800px;
+  height: 322px;
+  padding-top: 13px;
+}
+
+.listeDesIngredients {
+  display: grid;
+  place-content: center;
+  grid-template-columns: repeat(3, 180px);
+  gap: 2px;
+  .p {
+    margin-block-start: 0%;
+  }
+}
+
+.right {
+  padding-top: 20px;
+}
+
+.rightAll {
+  padding-left: 15px;
+}
